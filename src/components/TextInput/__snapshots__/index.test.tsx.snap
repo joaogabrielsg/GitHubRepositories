@@ -1,12 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TextInput component to match snapshot 1`] = `
-<TextInput
-  allowFontScaling={true}
-  onChangeText={[MockFunction]}
-  rejectResponderTermination={true}
-  testID="nativeTextInput"
-  underlineColorAndroid="transparent"
-  value=""
-/>
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "padding": 20,
+    }
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[MockFunction]}
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    testID="nativeTextInput"
+    underlineColorAndroid="transparent"
+    value=""
+  />
+  <Image
+    accessible={true}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    source={
+      Object {
+        "testUri": "../../../assets/search.png",
+      }
+    }
+    style={
+      Object {
+        "height": 30,
+        "resizeMode": "contain",
+        "width": 30,
+      }
+    }
+  />
+</View>
 `;
