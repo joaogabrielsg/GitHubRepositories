@@ -14,11 +14,15 @@ export interface ErrorRequest {
 
 export const fetchRepositories = async (
   searchText: string,
+  perPage: number = 20,
+  page: number = 0,
 ): Promise<RepositoriesResponse | ErrorRequest> => {
   try {
     const response = await api.get('/search/repositories', {
       params: {
         q: searchText,
+        per_page: perPage,
+        page,
       },
     });
     return {
