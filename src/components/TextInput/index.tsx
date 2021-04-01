@@ -15,7 +15,7 @@ import {theme} from '../../styles';
 
 interface CustomTextInputProps extends TextInputProps {
   text: string;
-  onChangeText?: () => {};
+  onChangeText?: () => void;
   onSearch?: () => {};
 }
 

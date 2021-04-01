@@ -33,8 +33,10 @@ export const fetchRepositories = async (
   } catch (error) {
     return {
       statusError: error?.response?.status || error?.statusError,
-      msgError: 'Erro ao buscar a lista de repositorios',
-      titleError: error?.response?.title,
+      msgError:
+        error?.response?.data?.message ||
+        'Erro ao buscar a lista de repositorios',
+      titleError: error?.response?.data?.message || 'error',
     };
   }
 };

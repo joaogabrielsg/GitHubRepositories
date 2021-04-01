@@ -1,9 +1,16 @@
 import React, {useState, createContext, useContext} from 'react';
 import LoadingModal from '../components/LoadingModal';
 
-const LoadingContext = createContext({});
+interface LoadingContextData {
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+}
 
-export const LoadingProvider = ({children}) => {
+const LoadingContext = createContext<LoadingContextData>(
+  {} as LoadingContextData,
+);
+
+export const LoadingProvider: React.FunctionComponent = ({children}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (

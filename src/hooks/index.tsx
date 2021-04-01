@@ -1,8 +1,11 @@
 import React from 'react';
 import {LoadingProvider} from './useLoading';
+import {MessageProvider} from './useMessage';
 
 const AppProviderContext = ({children}) => (
-  <LoadingProvider>{children}</LoadingProvider>
+  <MessageProvider>
+    <LoadingProvider>{children}</LoadingProvider>
+  </MessageProvider>
 );
 
 export default AppProviderContext;
