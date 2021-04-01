@@ -27,7 +27,7 @@ const MessageModal: React.FunctionComponent<MessageModalProps> = props => {
             <View style={styles.messageContainer}>
               <Text style={styles.message}>{props.message}</Text>
             </View>
-            <TouchableWithoutFeedback onPress={props.onClose}>
+            <TouchableWithoutFeedback testID="button" onPress={props.onClose}>
               <View style={styles.buttonContainer}>
                 <Text style={styles.button}>ok</Text>
               </View>

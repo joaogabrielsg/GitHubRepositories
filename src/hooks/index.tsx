@@ -3,9 +3,9 @@ import {LoadingProvider} from './useLoading';
 import {MessageProvider} from './useMessage';
 
 const AppProviderContext = ({children}) => (
-  <MessageProvider>
-    <LoadingProvider>{children}</LoadingProvider>
-  </MessageProvider>
+  <LoadingProvider>
+    <MessageProvider>{children}</MessageProvider>
+  </LoadingProvider>
 );
 
 export default AppProviderContext;
