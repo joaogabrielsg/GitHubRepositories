@@ -10,7 +10,7 @@ import {
 
 import Search from '../../../assets/search.png';
 
-import {theme} from '../../styles';
+import {theme, font} from '../../styles';
 
 interface CustomTextInputProps extends TextInputProps {
   text: string;
@@ -44,6 +44,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
+    fontSize: font.subTitle,
+    color: theme.textColor,
   },
   image: {
     height: 30,
