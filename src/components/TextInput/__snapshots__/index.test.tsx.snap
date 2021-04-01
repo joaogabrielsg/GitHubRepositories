@@ -18,7 +18,9 @@ exports[`TextInput component to match snapshot 1`] = `
     rejectResponderTermination={true}
     style={
       Object {
+        "color": "rgb(0, 0, 0)",
         "flex": 1,
+        "fontSize": 17,
       }
     }
     testID="nativeTextInput"
