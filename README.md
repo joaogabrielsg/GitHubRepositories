@@ -43,4 +43,9 @@ yarn run android
 ```
 Or run the android simulator opening the android folder in AndroidStudio and run the aplication.
 
+## Tests
 
+Run the following, to run all tests:
+```sh
+yarn run test
+```
