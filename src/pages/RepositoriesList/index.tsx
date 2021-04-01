@@ -1,12 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {StyleSheet, View, ListRenderItem} from 'react-native';
 
-import {theme} from '../../styles';
-import {
-  fetchRepositories,
-  RepositoriesResponse,
-  ErrorRequest,
-} from '../../services/apiGitHub';
+import {fetchRepositories} from '../../services/apiGitHub';
 
 import {useLoading} from '../../hooks/useLoading';
 import {useMessage} from '../../hooks/useMessage';
@@ -15,32 +10,32 @@ import TextInput from '../../components/TextInput';
 import List from '../../components/List';
 import Card from '../../components/Card';
 
-interface Repository {
-  id: number;
-  name: string;
-  description: string;
-  stargazers_count: number;
-}
+import {Repository, RepositoriesResponse, ErrorRequest} from '../../types';
 
 const RepositoriesList: React.FunctionComponent = () => {
   const [searchText, setSearchText] = useState('');
   const [repositories, setRepositories] = useState<Array<Repository>>([]);
-  const {setIsLoading} = useLoading();
+  const [page, setPage] = useState(1);
+  const {isLoading, setIsLoading} = useLoading();
   const {setMessage} = useMessage();
 
   const searchRepositories = useCallback(
-    async text => {
+    async (text, nextPage) => {
       type Response = ErrorRequest & RepositoriesResponse;
+      setPage(nextPage);
+
       setIsLoading(true);
-      const response: Response = await fetchRepositories(text);
+      const response: Response = await fetchRepositories(text, 20, nextPage);
       setIsLoading(false);
+
       if (response?.statusError) {
         setMessage(response.msgError);
       } else {
-        setRepositories(response.items);
+        const newRepositories = [...repositories, ...response.items];
+        setRepositories(newRepositories);
       }
     },
-    [setIsLoading, setMessage],
+    [setIsLoading, setMessage, repositories],
   );
 
   const renderRepositoryItem: ListRenderItem<object> = useCallback(
@@ -60,13 +55,20 @@ const RepositoriesList: React.FunctionComponent = () => {
       <TextInput
         text={searchText}
         onChangeText={setSearchText}
-        onSearch={() => searchRepositories(searchText)}
+        onSearch={() => {
+          setRepositories([]);
+          searchRepositories(searchText, 1);
+        }}
       />
 
       <List
         data={repositories}
         renderItem={renderRepositoryItem}
         keyExtractor={(item: Repository) => item.id}
+        onEndReached={() =>
+          !isLoading ? searchRepositories(searchText, page + 1) : null
+        }
+        onEndReachedThreshold={0.1}
       />
     </View>
   );

@@ -6,7 +6,6 @@ import {
   View,
   Image,
   TouchableWithoutFeedback,
-  Touchable,
 } from 'react-native';
 
 import Search from '../../../assets/search.png';
@@ -16,7 +15,7 @@ import {theme} from '../../styles';
 interface CustomTextInputProps extends TextInputProps {
   text: string;
   onChangeText?: () => void;
-  onSearch?: () => {};
+  onSearch?: () => void;
 }
 
 const CustomTextInput: React.FunctionComponent<CustomTextInputProps> = props => {

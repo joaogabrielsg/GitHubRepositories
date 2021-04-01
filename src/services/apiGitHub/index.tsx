@@ -1,16 +1,6 @@
 import api from './config';
 
-export interface RepositoriesResponse {
-  totalCount: number;
-  incompleteResults: boolean;
-  items: Array<object>;
-}
-
-export interface ErrorRequest {
-  statusError: number;
-  titleError: string;
-  msgError: string;
-}
+import {RepositoriesResponse, ErrorRequest} from '../../types';
 
 export const fetchRepositories = async (
   searchText: string,
