@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {StyleSheet, View, ListRenderItem} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {fetchRepositories} from '../../services/apiGitHub';
 
@@ -38,18 +38,6 @@ const RepositoriesList: React.FunctionComponent = () => {
     [setIsLoading, setMessage, repositories],
   );
 
-  const renderRepositoryItem: ListRenderItem<object> = useCallback(
-    ({item}: {item: Repository}) => (
-      <Card
-        key={item?.id || ''}
-        title={item.name}
-        description={item.description}
-        starsCount={item.stargazers_count}
-      />
-    ),
-    [],
-  );
-
   return (
     <View style={styles.container}>
       <TextInput
@@ -61,10 +49,17 @@ const RepositoriesList: React.FunctionComponent = () => {
         }}
       />
 
-      <List
+      <List<Repository>
         data={repositories}
-        renderItem={renderRepositoryItem}
-        keyExtractor={(item: Repository) => item.id}
+        renderItem={({item}: {item: Repository}) => (
+          <Card
+            key={item?.id || ''}
+            title={item.name}
+            description={item.description}
+            starsCount={item.stargazers_count}
+          />
+        )}
+        keyExtractor={(item: Repository) => `${item.id}`}
         onEndReached={() =>
           !isLoading ? searchRepositories(searchText, page + 1) : null
         }

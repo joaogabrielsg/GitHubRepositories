@@ -1,8 +1,16 @@
 import React from 'react';
-import {FlatListProps, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 
-const List: React.FunctionComponent<FlatListProps<object>> = props => {
-  return <FlatList showsVerticalScrollIndicator={false} {...props} />;
+interface ListProps<Type> {
+  data: Type[];
+  renderItem: ({item}: {item: Type}) => React.ReactElement;
+  keyExtractor: (item: Type, index: number) => string;
+  onEndReached: () => void;
+  onEndReachedThreshold: number;
+}
+
+const List = <Type,>(props: React.PropsWithChildren<ListProps<Type>>) => {
+  return <FlatList<Type> showsVerticalScrollIndicator={false} {...props} />;
 };
 
 export default List;
