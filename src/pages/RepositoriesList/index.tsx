@@ -21,17 +21,23 @@ const RepositoriesList: React.FunctionComponent = () => {
 
   const searchRepositories = useCallback(
     async (text, nextPage) => {
-      type Response = ErrorRequest & RepositoriesResponse;
+      type Response = ErrorRequest | RepositoriesResponse;
       setPage(nextPage);
 
       setIsLoading(true);
       const response: Response = await fetchRepositories(text, 20, nextPage);
       setIsLoading(false);
 
-      if (response?.statusError) {
-        setMessage(response.msgError);
+      const responseError = response as ErrorRequest;
+      const responseRepositories = response as RepositoriesResponse;
+
+      if (responseError?.statusError) {
+        setMessage(responseError.msgError);
       } else {
-        const newRepositories = [...repositories, ...response.items];
+        const newRepositories = [
+          ...repositories,
+          ...responseRepositories.items,
+        ];
         setRepositories(newRepositories);
       }
     },
